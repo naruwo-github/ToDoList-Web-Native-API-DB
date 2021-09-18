@@ -20,8 +20,6 @@ services:
     command: sh -c "cd api && npm run start"
     ports:
       - "4000:4000"
-#    networks:
-#      - mongodb-app-network
     depends_on:
       - db
   db:
@@ -31,7 +29,3 @@ services:
       - ./mongo-volume:/data/db
     ports:
       - "27017:27017"
-#    networks:
-#      - mongodb-app-network
-#networks:
-#  mongodb-app-network:
