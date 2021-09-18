@@ -10,6 +10,20 @@ const express = require("express"),
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://db/Tododb");
 
+// CORSのサーバーサイド側の許可を設定
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Credentials', true);
+
+    if ('OPTIONS' == req.method) {
+        res.send(204); // 204: No Content
+    } else {
+        next();
+    }
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
