@@ -2,7 +2,7 @@
 
 const express = require("express"),
     app = express(),
-    port = process.env.PORT || 3000,
+    port = process.env.PORT || 4000,
     mongoose = require("mongoose"),
     Task = require("./models/taskModel"),
     bodyParser = require("body-parser");
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // サーバとエンドポイントのルーティング
-const routes = require("./api/routes/taskRoutes");
+const routes = require("./routes/taskRoutes");
 routes(app);
 
 // 指定ポートでのリッスン（外部からのアクセスに備えて待機すること）開始
