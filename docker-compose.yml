@@ -1,11 +1,32 @@
 version: '3.8'
 services:
-  node:
+  browser-app:
     build:
-      context: .
+      context: ./browser-app/
       dockerfile: Dockerfile
     volumes:
       - ./:/usr/src/app
     command: sh -c "cd browser-app && npm start"
     ports:
       - "3000:3000"
+
+  api:
+    restart: always
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c "cd api && npm run start"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - "27017:27017"
