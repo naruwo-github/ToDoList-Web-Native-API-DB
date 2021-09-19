@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Base extends React.Component {
+import {getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById} from './api/httpHelper'
+
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -35,24 +37,17 @@ class Base extends React.Component {
 
     // render後に一度だけ走る処理
     componentDidMount() {
-        // TODO: httpHelperに移動させたい
-        fetch("http://localhost:4000/tasks", {mode: "cors"})
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        tasks: result
-                    });
-                },
-                // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
+        getAllTasks((result) => {
+            this.setState({
+                isLoaded: true,
+                tasks: result
+            });
+        }, (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        })
     }
 
     // render後に毎回必ず走る処理（レイアウトを変更するような処理→render→これ）
@@ -66,6 +61,6 @@ class Base extends React.Component {
 }
 
 ReactDOM.render(
-    <Base />,
+    <App />,
     document.getElementById('root')
 );
