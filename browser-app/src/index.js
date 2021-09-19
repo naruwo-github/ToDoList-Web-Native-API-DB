@@ -12,8 +12,33 @@ class App extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            tasks: []
-        }
+            tasks: [],
+            formTextValue: ""
+        };
+        this.formTextChanged = this.formTextChanged.bind(this);
+        this.submitButtonTapped = this.submitButtonTapped.bind(this);
+    }
+
+    formTextChanged(event) {
+        this.setState({formTextValue: event.target.value})
+    }
+
+    submitButtonTapped() {
+        if (this.state.formTextValue === "") { return; }
+
+        createTask(`${this.state.formTextValue}`,
+            (result) => {
+            const copiedTasks = this.state.tasks.concat();
+            copiedTasks.push(result);
+            this.setState({
+                tasks: copiedTasks
+            });
+            }, (error) => {
+            this.setState({
+                isLoaded: true,
+                error
+            });
+        })
     }
 
     render() {
@@ -24,13 +49,20 @@ class App extends React.Component {
             return <div>Loading...</div>;
         } else {
             return (
-                <ul>
-                    {tasks.map(task=> (
-                        <li key={task._id}>
-                            {task.name}
-                        </li>
-                    ))}
-                </ul>
+                <div>
+                    <ul>
+                        {tasks.map(task=> (
+                            <li key={task._id}>
+                                {task.name}
+                            </li>
+                        ))}
+                    </ul>
+                    <label>
+                        Create new task:
+                        <input type="text" value={this.state.formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
+                        <button onClick={this.submitButtonTapped}>Submit</button>
+                    </label>
+                </div>
             );
         }
     }
