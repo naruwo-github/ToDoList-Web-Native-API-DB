@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
 import {getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById} from './api/httpHelper'
+import TaskDetail from "./components/taskDetail";
 
 class App extends React.Component {
 
@@ -13,12 +13,18 @@ class App extends React.Component {
             error: null,
             isLoaded: false,
             tasks: [],
-            formTextValue: ""
+            formTextValue: "",
+            selectedTask: null
         };
         // 関数の中でthisにアクセスするために、thisをバインドする必要がある
+        this.taskLabelTapped = this.taskLabelTapped.bind(this);
         this.formTextChanged = this.formTextChanged.bind(this);
         this.submitButtonTapped = this.submitButtonTapped.bind(this);
         this.deleteLastButtonTapped = this.deleteLastButtonTapped.bind(this);
+    }
+
+    taskLabelTapped(task) {
+        this.setState({selectedTask: task});
     }
 
     formTextChanged(event) {
@@ -62,10 +68,11 @@ class App extends React.Component {
         } else {
             return (
                 <div>
+                    <h1>ToDoList</h1>
                     <ul>
                         {tasks.map(task=> (
                             <li key={task._id}>
-                                {task.name}
+                                <label className="clickableLabel" onClick={() => this.taskLabelTapped(task)}>{task.name}</label>
                             </li>
                         ))}
                     </ul>
@@ -75,6 +82,7 @@ class App extends React.Component {
                         <button onClick={this.submitButtonTapped}>Submit</button>
                     </label>
                     <button onClick={this.deleteLastButtonTapped}>Delete last!</button>
+                    <TaskDetail task={this.state.selectedTask} />
                 </div>
             );
         }
