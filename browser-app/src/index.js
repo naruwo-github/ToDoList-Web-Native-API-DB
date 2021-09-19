@@ -15,12 +15,14 @@ class App extends React.Component {
             tasks: [],
             formTextValue: ""
         };
+        // 関数の中でthisにアクセスするために、thisをバインドする必要がある
         this.formTextChanged = this.formTextChanged.bind(this);
         this.submitButtonTapped = this.submitButtonTapped.bind(this);
+        this.deleteLastButtonTapped = this.deleteLastButtonTapped.bind(this);
     }
 
     formTextChanged(event) {
-        this.setState({formTextValue: event.target.value})
+        this.setState({formTextValue: event.target.value});
     }
 
     submitButtonTapped() {
@@ -30,15 +32,25 @@ class App extends React.Component {
             (result) => {
             const copiedTasks = this.state.tasks.concat();
             copiedTasks.push(result);
-            this.setState({
-                tasks: copiedTasks
-            });
-            }, (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
-        })
+            this.setState({ tasks: copiedTasks });
+            },
+            (error) => {
+            this.setState({ isLoaded: true, error });
+        });
+    }
+
+    deleteLastButtonTapped() {
+        if (this.state.tasks.length === 0) { return; }
+
+        const copiedTasks = this.state.tasks.concat();
+        const taskId = copiedTasks.pop()._id;
+        deleteTaskById(`${taskId}`,
+            (result) => {
+            this.setState({ tasks: copiedTasks });
+            },
+            (error) => {
+            this.setState({ isLoaded: true, error });
+        });
     }
 
     render() {
@@ -62,6 +74,7 @@ class App extends React.Component {
                         <input type="text" value={this.state.formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
                         <button onClick={this.submitButtonTapped}>Submit</button>
                     </label>
+                    <button onClick={this.deleteLastButtonTapped}>Delete last!</button>
                 </div>
             );
         }
@@ -70,16 +83,10 @@ class App extends React.Component {
     // render後に一度だけ走る処理
     componentDidMount() {
         getAllTasks((result) => {
-            this.setState({
-                isLoaded: true,
-                tasks: result
-            });
+            this.setState({ isLoaded: true, tasks: result});
         }, (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
-        })
+            this.setState({ isLoaded: true, error });
+        });
     }
 
     // render後に毎回必ず走る処理（レイアウトを変更するような処理→render→これ）
