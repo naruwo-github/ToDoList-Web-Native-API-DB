@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById} from './api/httpHelper'
+import TaskList from "./components/taskList";
 import TaskDetail from "./components/taskDetail";
 
 class App extends React.Component {
@@ -72,13 +73,7 @@ class App extends React.Component {
             return (
                 <div>
                     <h1>ToDoList</h1>
-                    <ul>
-                        {tasks.map(task=> (
-                            <li key={task._id}>
-                                <label className="clickableLabel" onClick={() => this.taskLabelTapped(task)}>{task.name}</label>
-                            </li>
-                        ))}
-                    </ul>
+                    <TaskList tasks={tasks} taskLabelTapped={this.taskLabelTapped} />
                     <label>
                         Create new task:
                         <input type="text" value={formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
