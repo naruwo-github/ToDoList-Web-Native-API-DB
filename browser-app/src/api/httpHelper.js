@@ -1,17 +1,101 @@
-// TODO: リクエストメソッドを集約させる
-// クロージャとしてレスポンス時のsuccess, failure時のアクションを引数に取れるようにする
+// リクエストメソッドを集約する場所
+// TODO: 同じことをたくさん書いているので、処理を抽出したい
 
-export default function getAllTasks() {
+const API_URL = "http://localhost:4000/tasks/";
+
+export function getAllTasks(successCallback, failureCallback) {
+    fetch(API_URL, {
+        mode: "cors",
+        method: "GET"
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                successCallback(result);
+            },
+            // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+            (error) => {
+                failureCallback(error)
+            }
+        )
 }
 
-export default function createTask() {
+export function createTask(taskName, successCallback, failureCallback) {
+    fetch(API_URL, {
+        mode: "cors",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: taskName
+        })
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                successCallback(result);
+            },
+            // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+            (error) => {
+                failureCallback(error)
+            }
+        )
 }
 
-export default function getTaskById(taskId) {
+export function getTaskById(taskId, successCallback, failureCallback) {
+    fetch(`${API_URL}${taskId}`, {
+        mode: "cors",
+        method: "GET"
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                successCallback(result);
+            },
+            // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+            (error) => {
+                failureCallback(error)
+            }
+        )
 }
 
-export default function deleteTaskById(taskId) {
+export function deleteTaskById(taskId, successCallback, failureCallback) {
+    fetch(`${API_URL}${taskId}`, {
+        mode: "cors",
+        method: "DELETE"
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                successCallback(result);
+            },
+            // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+            (error) => {
+                failureCallback(error)
+            }
+        )
 }
 
-export default function putTaskById(taskId, body) {
+export function putTaskById(taskId, taskName, successCallback, failureCallback) {
+    fetch(`${API_URL}${taskId}`, {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: taskName
+        })
+    })
+        .then(res => res.json())
+        .then(
+            (result) => {
+                successCallback(result);
+            },
+            // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+            (error) => {
+                failureCallback(error)
+            }
+        )
 }
