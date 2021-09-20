@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById} from './api/httpHelper'
+import TaskList from "./components/taskList";
+import CreateNewTask from "./components/createNewTask";
 import TaskDetail from "./components/taskDetail";
 
 class App extends React.Component {
@@ -20,6 +22,7 @@ class App extends React.Component {
         this.taskLabelTapped = this.taskLabelTapped.bind(this);
         this.formTextChanged = this.formTextChanged.bind(this);
         this.submitButtonTapped = this.submitButtonTapped.bind(this);
+        this.updateSelectedTask = this.updateSelectedTask.bind(this);
         this.deleteSelectedTask = this.deleteSelectedTask.bind(this);
     }
 
@@ -48,12 +51,30 @@ class App extends React.Component {
     }
 
     // TaskDetailコンポーネントに渡す関数
+    updateSelectedTask(taskId, taskName) {
+        if (taskName === "") { return; }
+
+        putTaskById(taskId, taskName,
+            (result) => {
+                const copiedTasks = this.state.tasks.concat();
+                copiedTasks.find((task) => {
+                    return task._id === taskId
+                }).name = taskName;
+                this.setState({tasks: copiedTasks});
+            },
+            (error) => {
+                this.setState({isLoaded: true, error});
+            }
+        )
+    }
+
+    // TaskDetailコンポーネントに渡す関数
     deleteSelectedTask(taskId) {
         deleteTaskById(taskId,
             (result) => {
                 const copiedTasks = this.state.tasks.concat().filter((task) => {
                     return task._id !== taskId;
-                })
+                });
                 this.setState({tasks: copiedTasks, selectedTask: null});
             },
             (error) => {
@@ -72,23 +93,12 @@ class App extends React.Component {
             return (
                 <div>
                     <h1>ToDoList</h1>
-                    <ul>
-                        {tasks.map(task=> (
-                            <li key={task._id}>
-                                <label className="clickableLabel" onClick={() => this.taskLabelTapped(task)}>{task.name}</label>
-                            </li>
-                        ))}
-                    </ul>
-                    <label>
-                        Create new task:
-                        <input type="text" value={formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
-                        <button onClick={this.submitButtonTapped}>Submit</button>
-                    </label>
-                    {/* taskが選択されている場合にのみ、TaskDetailコンポーネントを表示する */}
+                    <TaskList tasks={tasks} taskLabelTapped={this.taskLabelTapped} />
+                    <CreateNewTask formTextValue={formTextValue} formTextChanged={this.formTextChanged} submitButtonTapped={this.submitButtonTapped} />
                     {selectedTask === null ? (
-                        <p>Select a task!</p>
+                        <h2>Select a task!</h2>
                     ) : (
-                        <TaskDetail task={selectedTask} deleteSelectedTask={this.deleteSelectedTask} />
+                        <TaskDetail task={selectedTask} updateSelectedTask={this.updateSelectedTask} deleteSelectedTask={this.deleteSelectedTask} />
                     )}
                 </div>
             );

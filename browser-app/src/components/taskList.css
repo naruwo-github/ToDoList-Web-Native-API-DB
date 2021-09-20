@@ -1,0 +1,14 @@
+.clickableLabel {
+    border-bottom: solid 1px;
+    color: darkblue;
+}
+
+.clickableLabel:hover {
+    font-size: 15px;
+    color: blue;
+}
+
+.clickableLabel:active {
+    font-size: 14px;
+    color: darkblue;
+}

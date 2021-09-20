@@ -9,11 +9,6 @@ export default function TaskDetail(props) {
         setFormTextValue(value);
     }
 
-    function updateTaskName() {
-        // TODO: putの処理を追記するor親コンポーネントから関数を渡す
-        console.log(formTextValue);
-    }
-
     return (
         <div className="detailBox">
             <div>
@@ -27,9 +22,9 @@ export default function TaskDetail(props) {
             </div>
             <div>
                 <label>
-                    Update this task:
+                    Update this name:
                     <input type="text" placeholder="New Task Name" onChange={handleInputChange} />
-                    <button onClick={updateTaskName}>Submit</button>
+                    <button onClick={() => props.updateSelectedTask(props.task._id, formTextValue)}>Submit</button>
                 </label>
                 <button onClick={() => props.deleteSelectedTask(props.task._id)}>Delete this!</button>
             </div>
