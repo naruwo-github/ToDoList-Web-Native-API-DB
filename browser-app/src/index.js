@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById} from './api/httpHelper'
 import TaskList from "./components/taskList";
+import CreateNewTask from "./components/createNewTask";
 import TaskDetail from "./components/taskDetail";
 
 class App extends React.Component {
@@ -74,14 +75,9 @@ class App extends React.Component {
                 <div>
                     <h1>ToDoList</h1>
                     <TaskList tasks={tasks} taskLabelTapped={this.taskLabelTapped} />
-                    <label>
-                        Create new task:
-                        <input type="text" value={formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
-                        <button onClick={this.submitButtonTapped}>Submit</button>
-                    </label>
-                    {/* taskが選択されている場合にのみ、TaskDetailコンポーネントを表示する */}
+                    <CreateNewTask formTextValue={formTextValue} formTextChanged={this.formTextChanged} submitButtonTapped={this.submitButtonTapped} />
                     {selectedTask === null ? (
-                        <p>Select a task!</p>
+                        <h2>Select a task!</h2>
                     ) : (
                         <TaskDetail task={selectedTask} deleteSelectedTask={this.deleteSelectedTask} />
                     )}
