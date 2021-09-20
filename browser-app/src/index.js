@@ -20,7 +20,7 @@ class App extends React.Component {
         this.taskLabelTapped = this.taskLabelTapped.bind(this);
         this.formTextChanged = this.formTextChanged.bind(this);
         this.submitButtonTapped = this.submitButtonTapped.bind(this);
-        this.deleteLastButtonTapped = this.deleteLastButtonTapped.bind(this);
+        this.deleteSelectedTask = this.deleteSelectedTask.bind(this);
     }
 
     taskLabelTapped(task) {
@@ -36,31 +36,34 @@ class App extends React.Component {
 
         createTask(`${this.state.formTextValue}`,
             (result) => {
-            const copiedTasks = this.state.tasks.concat();
-            copiedTasks.push(result);
-            this.setState({ tasks: copiedTasks });
+                const copiedTasks = this.state.tasks.concat();
+                copiedTasks.push(result);
+                this.setState({tasks: copiedTasks});
             },
             (error) => {
-            this.setState({ isLoaded: true, error });
-        });
+                this.setState({isLoaded: true, error});
+            }
+        );
+        this.setState({formTextValue: ""});
     }
 
-    deleteLastButtonTapped() {
-        if (this.state.tasks.length === 0) { return; }
-
-        const copiedTasks = this.state.tasks.concat();
-        const taskId = copiedTasks.pop()._id;
-        deleteTaskById(`${taskId}`,
+    // TaskDetailコンポーネントに渡す関数
+    deleteSelectedTask(taskId) {
+        deleteTaskById(taskId,
             (result) => {
-            this.setState({ tasks: copiedTasks });
+                const copiedTasks = this.state.tasks.concat().filter((task) => {
+                    return task._id !== taskId;
+                })
+                this.setState({tasks: copiedTasks, selectedTask: null});
             },
             (error) => {
-            this.setState({ isLoaded: true, error });
-        });
+                this.setState({isLoaded: true, error});
+            }
+        )
     }
 
     render() {
-        const { error, isLoaded, tasks} = this.state;
+        const { error, isLoaded, tasks, formTextValue, selectedTask} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -78,11 +81,15 @@ class App extends React.Component {
                     </ul>
                     <label>
                         Create new task:
-                        <input type="text" value={this.state.formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
+                        <input type="text" value={formTextValue} placeholder="Task Name" onChange={this.formTextChanged} />
                         <button onClick={this.submitButtonTapped}>Submit</button>
                     </label>
-                    <button onClick={this.deleteLastButtonTapped}>Delete last!</button>
-                    <TaskDetail task={this.state.selectedTask} />
+                    {/* taskが選択されている場合にのみ、TaskDetailコンポーネントを表示する */}
+                    {selectedTask === null ? (
+                        <p>Select a task!</p>
+                    ) : (
+                        <TaskDetail task={selectedTask} deleteSelectedTask={this.deleteSelectedTask} />
+                    )}
                 </div>
             );
         }
@@ -91,10 +98,11 @@ class App extends React.Component {
     // render後に一度だけ走る処理
     componentDidMount() {
         getAllTasks((result) => {
-            this.setState({ isLoaded: true, tasks: result});
-        }, (error) => {
-            this.setState({ isLoaded: true, error });
-        });
+                this.setState({isLoaded: true, tasks: result});
+            }, (error) => {
+                this.setState({isLoaded: true, error});
+            }
+        );
     }
 
     // render後に毎回必ず走る処理（レイアウトを変更するような処理→render→これ）
