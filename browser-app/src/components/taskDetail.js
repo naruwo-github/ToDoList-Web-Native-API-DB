@@ -17,7 +17,8 @@ export default function TaskDetail(props) {
             <div>
                 <p>_id: {props.task._id}</p>
                 <p>name: {props.task.name}</p>
-                <p>Created_date: {props.task.Created_date}</p>
+                <p>description: {props.task.description}</p>
+                <p>created_date: {props.task.created_date}</p>
                 <p>__v: {props.task.__v}</p>
             </div>
             <div>
