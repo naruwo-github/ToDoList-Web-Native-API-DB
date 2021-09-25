@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   db:
+    # 通常imageのversion指定は、latestを用いない（buildのタイミングによってversionが変化する可能性があるため）
     image: mongo:latest
     restart: always
     volumes:
