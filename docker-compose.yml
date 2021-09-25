@@ -11,11 +11,11 @@ services:
   api:
     restart: always
     build:
-      context: ./api/
+      context: ./api
       dockerfile: Dockerfile
     volumes:
-      - ./:/usr/src/app
-    command: sh -c "cd api && npm run start"
+      - ./api:/usr/src/app
+    command: sh -c "npm run start"
     ports:
       - "4000:4000"
     depends_on:
@@ -23,11 +23,11 @@ services:
   browser-app:
     restart: always
     build:
-      context: ./browser-app/
+      context: ./browser-app
       dockerfile: Dockerfile
     volumes:
-      - ./:/usr/src/app
-    command: sh -c "cd browser-app && npm start"
+      - ./browser-app:/usr/src/app
+    command: sh -c "npm start"
     ports:
       - "3000:3000"
     depends_on:
