@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   db:
+    container_name: db
     # 通常imageのversion指定は、latestを用いない（buildのタイミングによってversionが変化する可能性があるため）
     image: mongo:latest
     restart: always
@@ -9,6 +10,7 @@ services:
     ports:
       - "27017:27017"
   api:
+    container_name: api
     restart: always
     build:
       context: ./api
@@ -21,6 +23,7 @@ services:
     depends_on:
       - db
   browser-app:
+    container_name: browser-app
     restart: always
     build:
       context: ./browser-app
