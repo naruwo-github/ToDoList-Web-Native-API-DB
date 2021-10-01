@@ -94,12 +94,14 @@ class App extends React.Component {
       return (
         <div>
           <h1>ToDoList</h1>
-          <TaskList tasks={tasks} taskLabelTapped={this.taskLabelTapped} />
-          <CreateNewTask formTextValue={formTextValue} formTextChanged={this.formTextChanged} submitButtonTapped={this.submitButtonTapped} />
+          <TaskList tasks={tasks} taskLabelTapped={this.taskLabelTapped}/>
+          <CreateNewTask formTextValue={formTextValue} formTextChanged={this.formTextChanged}
+                         submitButtonTapped={this.submitButtonTapped}/>
           {selectedTask === null ? (
             <h2>Select a task!</h2>
           ) : (
-            <TaskDetail task={selectedTask} updateSelectedTask={this.updateSelectedTask} deleteSelectedTask={this.deleteSelectedTask} />
+            <TaskDetail task={selectedTask} updateSelectedTask={this.updateSelectedTask}
+                        deleteSelectedTask={this.deleteSelectedTask}/>
           )}
         </div>
       )
@@ -109,10 +111,10 @@ class App extends React.Component {
   // render後に一度だけ走る処理
   componentDidMount () {
     getAllTasks((result) => {
-      this.setState({ isLoaded: true, tasks: result })
-    }, (error) => {
-      this.setState({ isLoaded: true, error })
-    }
+        this.setState({ isLoaded: true, tasks: result })
+      }, (error) => {
+        this.setState({ isLoaded: true, error })
+      }
     )
   }
 
@@ -126,6 +128,6 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App />,
+  <App/>,
   document.getElementById('root')
 )
