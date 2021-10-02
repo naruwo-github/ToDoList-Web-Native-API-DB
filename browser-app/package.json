@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "test": "jest --coverage",
     "eject": "react-scripts eject",
-    "uitest": "cd ./test/uiTest/ && mocha indexHtmlTest.js --timeout 10000"
+    "json-server": "cd ./json_server && $(npm bin)/json-server --watch db.json -p 4000",
+    "ui-test": "cd ./test/uiTest/ && mocha indexHtmlTest.js --timeout 10000"
   },
   "eslintConfig": {
     "extends": [
