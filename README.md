@@ -26,3 +26,6 @@ To Do List Application: Web app, Native app, API, DB.
       5. レスポンスのJSONを整形して表示するには、パイプで-mjson.toolの実行の入力値にすれば良い: ``` | python -mjson.tool```
 5. MongoDB: [localhost:27017](http://localhost:27017)
 6. APIサーバでモックデータを使う場合は```/browser-app/json_server/```にて```$(npm bin)/json-server --watch db.json -p 4000```を実行
+7. Testを行う場合
+    * ユニットテスト：```/browser-app/```にて```npm test```を実行（Jestによるテスト）
+    * UIテスト：```/browser-app/```にて```npm run uitest```を実行
