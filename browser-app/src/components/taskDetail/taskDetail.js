@@ -10,7 +10,7 @@ export default function TaskDetail (props) {
   }
 
   return (
-    <div className='detailBox'>
+    <div className="detailBox">
       <div>
         <h2>Selected Task Detail</h2>
       </div>
@@ -24,7 +24,7 @@ export default function TaskDetail (props) {
       <div>
         <label>
           Update this name:
-          <input type='text' placeholder='New Task Name' onChange={handleInputChange} />
+          <input type="text" placeholder="New Task Name" onChange={handleInputChange}/>
           <button onClick={() => props.updateSelectedTask(props.task._id, formTextValue)}>Submit</button>
         </label>
         <button onClick={() => props.deleteSelectedTask(props.task._id)}>Delete this!</button>

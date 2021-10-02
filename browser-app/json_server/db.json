@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "_id": 1,
+      "name": "json-server implementation",
+      "description": "I got it!!!",
+      "created_at": "2021-01-01",
+      "__v": 0
+    },
+    {
+      "_id": 2,
+      "name": "Teaching",
+      "description": "About coding???",
+      "created_at": "2021-01-02",
+      "__v": 0
+    },
+    {
+      "_id": 3,
+      "name": "Programming",
+      "description": "I am a great engineer.",
+      "created_at": "2021-01-03",
+      "__v": 0
+    },
+    {
+      "_id": 4,
+      "name": "Running",
+      "description": "Running...",
+      "created_at": "2021-01-04",
+      "__v": 0
+    },
+    {
+      "_id": 5,
+      "name": "Reading",
+      "description": "many many many books!!!",
+      "created_at": "2021-01-05",
+      "__v": 0
+    }
+  ]
+}
