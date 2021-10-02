@@ -1,5 +1,2 @@
-# IntelliJ
-.idea/
-
 # MongoDB
-mongo-volume/
+mongo-volume
