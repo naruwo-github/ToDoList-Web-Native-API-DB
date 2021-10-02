@@ -1,3 +1,9 @@
+table {
+    background-color: #7f7f7f;
+    border: 2px black solid;
+    padding: 5px;
+}
+
 .clickableLabel {
     border-bottom: solid 1px;
     color: darkblue;
