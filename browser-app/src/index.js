@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import { getAllTasks, createTask, getTaskById, deleteTaskById, putTaskById } from './api/httpHelper'
-import TaskList from './components/taskList'
-import CreateNewTask from './components/createNewTask'
-import TaskDetail from './components/taskDetail'
+import TaskList from './components/taskList/taskList'
+import CreateNewTask from './components/createNewTask/createNewTask'
+import TaskDetail from './components/taskDetail/taskDetail'
 
 class App extends React.Component {
   constructor (props) {
