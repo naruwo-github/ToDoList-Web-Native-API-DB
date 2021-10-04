@@ -7,8 +7,8 @@ export default function Router () {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={App} />
-        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/" component={App}/>
+        <Route exact path="/admin" component={Admin}/>
       </Switch>
     </BrowserRouter>
   )
