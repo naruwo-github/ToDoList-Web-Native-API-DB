@@ -3,15 +3,11 @@ To Do List Application: Web app, Native app, API, DB.
 
 ## 内容
 - ToDoリストのアプリケーション
-  - ブラウザアプリ: React.js
+  - 環境: Dockerによる仮想環境
+  - ブラウザアプリ: React.js, TypeScript, Webpack + Babel
   - ネイティブアプリ: Swift(iOS) & Kotlin(Android)
-  - API: Node.js, Express
+  - API: Node.js, Express, JavaScript TypeScript, Webpack + Babel
   - データベース: MongoDB
-
-## 実装優先順
-1. APIかつDB：```実装中```
-1. ブラウザアプリ：```実装中```
-1. ネイティブアプリ：```未着手```
 
 ## プロジェクトの実行方法
 1. dockerイメージを作成（```docker-compose build```）
@@ -29,8 +25,13 @@ To Do List Application: Web app, Native app, API, DB.
    * ```/browser-app/json_server/```にて```$(npm bin)/json-server --watch db.json -p 4000```を実行
    * ```/browser-app/```にて```npm run json-server```を実行
 1. Testを行う場合
-   * ユニットテスト：```/browser-app/```にて```npm test```を実行(Jestによるテスト)
+   * ユニットテスト：```/browser-app/```にて```npm jest```を実行(Jestによるテスト)
    * UIテスト：```/browser-app/```にて```npm run ui-test```を実行(Selenium Webdriverによるテスト)
 
 ## ブラウザアプリ画面(2021/10/02時点)
 ![img](./browser-app/public/appScreen20211002.png)
+
+## メモ：実装優先順
+1. APIかつDB：```実装中```
+1. ブラウザアプリ：```実装中```
+1. ネイティブアプリ：```未着手```
