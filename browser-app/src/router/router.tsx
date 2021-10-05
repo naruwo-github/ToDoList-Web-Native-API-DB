@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { App } from '../components/app'
+import App from '../components/app'
 import Admin from '../components/admin'
 
 export default function Router () {

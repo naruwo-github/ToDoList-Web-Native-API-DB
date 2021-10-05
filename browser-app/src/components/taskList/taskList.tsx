@@ -1,7 +1,18 @@
 import './taskList.css'
 import React from 'react'
 
-export default function TaskList ({ tasks, taskLabelTapped }) {
+interface Task {
+  _id: string
+  name: string
+  description: string
+  created_date: Date
+  __v: number
+}
+
+export default function TaskList ({ tasks, taskLabelTapped }: {
+  tasks: Task[]
+  taskLabelTapped: (task: Task) => void
+}) {
   return (
     <table>
       <thead>
