@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "rm -rf dist && webpack --mode development",
+    "start": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +16,12 @@
     "mongoose": "^6.0.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.12",
+    "webpack": "^5.56.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }
