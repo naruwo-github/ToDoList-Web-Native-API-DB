@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
     "build": "rm -rf dist && webpack --mode development",
     "start": "node ./dist/server.js",
