@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./api:/usr/src/app
-    command: sh -c "npm run start"
+    command: sh -c "npm run build && npm run start"
     ports:
       - "4000:4000"
     depends_on:
