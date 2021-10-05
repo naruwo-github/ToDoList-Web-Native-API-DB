@@ -98,8 +98,15 @@ export class App extends React.Component {
           {selectedTask === null ? (
             <h2>Select a task!</h2>
           ) : (
-            <TaskDetail task={selectedTask} updateSelectedTask={this.updateSelectedTask}
-                        deleteSelectedTask={this.deleteSelectedTask}/>
+            <TaskDetail
+              _id={selectedTask._id}
+              name={selectedTask.name}
+              description={selectedTask.description}
+              created_date={selectedTask.created_date}
+              __v={selectedTask.__v}
+              updateSelectedTask={this.updateSelectedTask}
+              deleteSelectedTask={this.deleteSelectedTask}
+            />
           )}
         </div>
       )
