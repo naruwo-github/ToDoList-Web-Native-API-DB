@@ -1,17 +1,66 @@
 // リクエストメソッドを集約する場所
 
-
-// TODO: 同じことをたくさん書いているので、処理を抽出したい
-
 const API_URL = 'http://localhost:4000/tasks/'
+
+// GETリクエストの土台
+export function getRequest (
+  url: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
+  fetch(url, {
+    mode: 'cors',
+    method: 'GET'
+  })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        successCallback(result)
+      },
+      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+      (error) => {
+        failureCallback(error)
+      }
+    )
+}
 
 export function getAllTasks (
   successCallback: (result: any) => {},
   failureCallback: (error: any) => {}
 ) {
-  fetch(API_URL, {
+  getRequest(
+    API_URL,
+    successCallback,
+    failureCallback
+  )
+}
+
+export function getTaskById (
+  taskId: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
+  getRequest(
+    `${API_URL}${taskId}`,
+    successCallback,
+    failureCallback
+  )
+}
+
+// POSTリクエストの土台
+export function postRequest (
+  url: string,
+  body: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
+  fetch(url, {
     mode: 'cors',
-    method: 'GET'
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: body
   })
     .then(res => res.json())
     .then(
@@ -30,49 +79,15 @@ export function createTask (
   successCallback: (result: any) => {},
   failureCallback: (error: any) => {}
 ) {
-  fetch(API_URL, {
-    mode: 'cors',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: taskName
-    })
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+  postRequest(
+    API_URL,
+    JSON.stringify({ name: taskName }),
+    successCallback,
+    failureCallback
+  )
 }
 
-export function getTaskById (
-  taskId: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
-) {
-  fetch(`${API_URL}${taskId}`, {
-    mode: 'cors',
-    method: 'GET'
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
-}
-
+// DELETEリクエスト
 export function deleteTaskById (
   taskId: string,
   successCallback: (result: any) => {},
@@ -94,6 +109,7 @@ export function deleteTaskById (
     )
 }
 
+// PUTリクエスト
 export function putTaskById (
   taskId: string,
   taskName: string,
