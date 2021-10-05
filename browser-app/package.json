@@ -22,6 +22,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "jest": "npx jest --coverage",
     "eject": "react-scripts eject",
     "json-server": "cd ./json_server && $(npm bin)/json-server --watch db.json -p 4000",
     "ui-test": "cd ./test/uiTest/ && mocha indexHtmlTest.js --timeout 10000"

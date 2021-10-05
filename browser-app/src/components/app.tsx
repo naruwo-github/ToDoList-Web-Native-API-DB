@@ -4,15 +4,24 @@ import TaskList from '../components/taskList/taskList'
 import CreateNewTask from '../components/createNewTask/createNewTask'
 import TaskDetail from '../components/taskDetail/taskDetail'
 
+interface Task {
+  _id: string
+  name: string
+  description: string
+  created_date: Date
+  __v: number
+}
+
 export default function App () {
-  const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [tasks, setTasks] = useState([])
-  const [formTextValue, setFormTextValue] = useState('')
-  const [selectedTask, setSelectedTask] = useState(null)
+  const [error, setError] = useState<any>(null)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+  const [tasks, setTasks] = useState<Task[]>([])
+  const [formTextValue, setFormTextValue] = useState<string>('')
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
   useEffect(() => {
     getAllTasks((result) => {
+        console.log('Get Response : ', result)
         setIsLoaded(true)
         setTasks(result)
       }, (error) => {
@@ -22,11 +31,11 @@ export default function App () {
     )
   }, [])
 
-  function taskLabelTapped (task) {
+  function taskLabelTapped (task: Task) {
     setSelectedTask(task)
   }
 
-  function formTextChanged (event) {
+  function formTextChanged (event: any) {
     setFormTextValue(event.target.value)
   }
 
@@ -35,6 +44,7 @@ export default function App () {
 
     createTask(`${formTextValue}`,
       (result) => {
+        console.log('Create Response : ', result)
         const copiedTasks = tasks.concat()
         copiedTasks.push(result)
         setTasks(copiedTasks)
@@ -48,16 +58,18 @@ export default function App () {
   }
 
   // TaskDetailコンポーネントに渡す関数
-  function updateSelectedTask (taskId, taskName) {
+  function updateSelectedTask (taskId: string, taskName: string) {
     if (taskName === '') { return }
 
     putTaskById(taskId, taskName,
       (result) => {
-        console.log(result)
+        console.log('Put Response : ', result)
         const copiedTasks = tasks.concat()
-        copiedTasks.find((task) => {
+        const matchedTask = copiedTasks.find((task) => {
           return task._id === taskId
-        }).name = taskName
+        })
+        if (typeof matchedTask === 'undefined') { return }
+        matchedTask.name = taskName
         setTasks(copiedTasks)
       },
       (error) => {
@@ -68,10 +80,10 @@ export default function App () {
   }
 
   // TaskDetailコンポーネントに渡す関数
-  function deleteSelectedTask (taskId) {
+  function deleteSelectedTask (taskId: string) {
     deleteTaskById(taskId,
       (result) => {
-        console.log(result)
+        console.log('Delete Response : ', result)
         const copiedTasks = tasks.concat().filter((task) => {
           return task._id !== taskId
         })

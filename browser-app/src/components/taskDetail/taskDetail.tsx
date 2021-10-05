@@ -7,8 +7,8 @@ interface Props {
   description: string
   created_date: Date
   __v: number
-  updateSelectedTask: (taskId: string, taskName: string) => {}
-  deleteSelectedTask: (taskId: string) => {}
+  updateSelectedTask: (taskId: string, taskName: string) => void
+  deleteSelectedTask: (taskId: string) => void
 }
 
 export default function TaskDetail (props: Props) {

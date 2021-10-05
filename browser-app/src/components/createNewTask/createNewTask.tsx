@@ -2,8 +2,8 @@ import React from 'react'
 
 interface Props {
   formTextValue: string
-  formTextChanged: () => {}
-  submitButtonTapped: () => {}
+  formTextChanged: (event: any) => void
+  submitButtonTapped: () => void
 }
 
 export default function CreateNewTask (props: Props) {

@@ -5,8 +5,8 @@ const API_URL = 'http://localhost:4000/tasks/'
 // GETリクエストの土台
 export function getRequest (
   url: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   fetch(url, {
     mode: 'cors',
@@ -25,8 +25,8 @@ export function getRequest (
 }
 
 export function getAllTasks (
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   getRequest(
     API_URL,
@@ -51,8 +51,8 @@ export function getTaskById (
 export function postRequest (
   url: string,
   body: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   fetch(url, {
     mode: 'cors',
@@ -76,8 +76,8 @@ export function postRequest (
 
 export function createTask (
   taskName: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   postRequest(
     API_URL,
@@ -90,8 +90,8 @@ export function createTask (
 // DELETEリクエスト
 export function deleteTaskById (
   taskId: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
@@ -113,8 +113,8 @@ export function deleteTaskById (
 export function putTaskById (
   taskId: string,
   taskName: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
+  successCallback: (result: any) => void,
+  failureCallback: (error: any) => void
 ) {
   fetch(`${API_URL}${taskId}`, {
     mode: 'cors',

@@ -5,13 +5,13 @@ interface Task {
   _id: string
   name: string
   description: string
-  created_at: Date
+  created_date: Date
   __v: number
 }
 
 export default function TaskList ({ tasks, taskLabelTapped }: {
   tasks: Task[]
-  taskLabelTapped: (task: Task) => {}
+  taskLabelTapped: (task: Task) => void
 }) {
   return (
     <table>
