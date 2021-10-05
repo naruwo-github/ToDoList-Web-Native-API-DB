@@ -1,9 +1,14 @@
 // リクエストメソッドを集約する場所
+
+
 // TODO: 同じことをたくさん書いているので、処理を抽出したい
 
 const API_URL = 'http://localhost:4000/tasks/'
 
-export function getAllTasks (successCallback, failureCallback) {
+export function getAllTasks (
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
   fetch(API_URL, {
     mode: 'cors',
     method: 'GET'
@@ -20,7 +25,11 @@ export function getAllTasks (successCallback, failureCallback) {
     )
 }
 
-export function createTask (taskName, successCallback, failureCallback) {
+export function createTask (
+  taskName: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
   fetch(API_URL, {
     mode: 'cors',
     method: 'POST',
@@ -43,7 +52,11 @@ export function createTask (taskName, successCallback, failureCallback) {
     )
 }
 
-export function getTaskById (taskId, successCallback, failureCallback) {
+export function getTaskById (
+  taskId: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
   fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
     method: 'GET'
@@ -60,7 +73,11 @@ export function getTaskById (taskId, successCallback, failureCallback) {
     )
 }
 
-export function deleteTaskById (taskId, successCallback, failureCallback) {
+export function deleteTaskById (
+  taskId: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
   fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
     method: 'DELETE'
@@ -77,7 +94,12 @@ export function deleteTaskById (taskId, successCallback, failureCallback) {
     )
 }
 
-export function putTaskById (taskId, taskName, successCallback, failureCallback) {
+export function putTaskById (
+  taskId: string,
+  taskName: string,
+  successCallback: (result: any) => {},
+  failureCallback: (error: any) => {}
+) {
   fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
     method: 'PUT',
