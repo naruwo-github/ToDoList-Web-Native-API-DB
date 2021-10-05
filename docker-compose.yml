@@ -30,8 +30,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./browser-app:/usr/src/app
-#    command: sh -c "npm start"
-    command: sh -c "npm run build && cd build && npx serve -p 3000"
+    command: sh -c "npm start"
+#    command: sh -c "npm run build && cd build && npx serve -p 3000" # 開発時の効率を上げるため、コメントアウト
     ports:
       - "3000:3000"
     depends_on:
