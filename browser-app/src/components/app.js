@@ -90,9 +90,15 @@ export default function App () {
       !isLoaded ? <div>Loading</div> :
         <div>
           <h1>ToDoList</h1>
-          <TaskList tasks={tasks} taskLabelTapped={taskLabelTapped}/>
-          <CreateNewTask formTextValue={formTextValue} formTextChanged={formTextChanged}
-                         submitButtonTapped={submitButtonTapped}/>
+          <TaskList
+            tasks={tasks}
+            taskLabelTapped={taskLabelTapped}
+          />
+          <CreateNewTask
+            formTextValue={formTextValue}
+            formTextChanged={formTextChanged}
+            submitButtonTapped={submitButtonTapped}
+          />
           {selectedTask === null ? (
             <h2>Select a task!</h2>
           ) : (
