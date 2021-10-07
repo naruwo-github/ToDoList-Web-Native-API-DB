@@ -3,120 +3,48 @@
 const API_URL = 'http://localhost:4000/tasks/'
 
 // GETリクエストの土台
-export function getRequest (
-  url: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  fetch(url, {
-    mode: 'cors',
-    method: 'GET'
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+export function get (url: string): Promise<any> {
+  return fetch(url, { mode: 'cors', method: 'GET' }).then(res => res.json())
 }
 
-export function getAllTasks (
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  getRequest(
-    API_URL,
-    successCallback,
-    failureCallback
-  )
+export function getAllTasks (): Promise<any> {
+  return get(API_URL)
 }
 
-export function getTaskById (
-  taskId: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
-) {
-  getRequest(
-    `${API_URL}${taskId}`,
-    successCallback,
-    failureCallback
-  )
+export function getTaskById (taskId: string): Promise<any> {
+  return get(`${API_URL}${taskId}`)
 }
 
 // POSTリクエストの土台
-export function postRequest (
-  url: string,
-  body: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  fetch(url, {
+export function post(url: string, body: string): Promise<any> {
+  return fetch(url, {
     mode: 'cors',
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: body
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+  }).then(res => res.json())
 }
 
-export function createTask (
-  taskName: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  postRequest(
+export function createTask (taskName: string): Promise<any> {
+  return post(
     API_URL,
-    JSON.stringify({ name: taskName }),
-    successCallback,
-    failureCallback
+    JSON.stringify({ name: taskName })
   )
 }
 
 // DELETEリクエスト
-export function deleteTaskById (
-  taskId: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  fetch(`${API_URL}${taskId}`, {
+export function deleteTaskById (taskId: string): Promise<any> {
+  return fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
     method: 'DELETE'
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+  }).then(res => res.json())
 }
 
 // PUTリクエスト
-export function putTaskById (
-  taskId: string,
-  taskName: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  fetch(`${API_URL}${taskId}`, {
+export function putTaskById (taskId: string, taskName: string): Promise<any> {
+  return fetch(`${API_URL}${taskId}`, {
     mode: 'cors',
     method: 'PUT',
     headers: {
@@ -125,15 +53,5 @@ export function putTaskById (
     body: JSON.stringify({
       name: taskName
     })
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+  }).then(res => res.json())
 }
