@@ -45,18 +45,19 @@ export default function App () {
   function submitButtonTapped () {
     if (formTextValue === '') { return }
 
-    createTask(`${formTextValue}`,
-      (result) => {
-        console.log('Create Response : ', result)
-        const copiedTasks = tasks.concat()
-        copiedTasks.push(result)
-        setTasks(copiedTasks)
-      },
-      (error) => {
-        setIsLoaded(true)
-        setError(error)
-      }
-    )
+    createTask(`${formTextValue}`)
+      .then(
+        (result) => {
+          console.log('Create Response : ', result)
+          const copiedTasks = tasks.concat()
+          copiedTasks.push(result)
+          setTasks(copiedTasks)
+        },
+        (error) => {
+          setIsLoaded(true)
+          setError(error)
+        }
+      )
     setFormTextValue('')
   }
 
@@ -64,40 +65,42 @@ export default function App () {
   function updateSelectedTask (taskId: string, taskName: string) {
     if (taskName === '') { return }
 
-    putTaskById(taskId, taskName,
-      (result) => {
-        console.log('Put Response : ', result)
-        const copiedTasks = tasks.concat()
-        const matchedTask = copiedTasks.find((task) => {
-          return task._id === taskId
-        })
-        if (typeof matchedTask === 'undefined') { return }
-        matchedTask.name = taskName
-        setTasks(copiedTasks)
-      },
-      (error) => {
-        setIsLoaded(true)
-        setError(error)
-      }
-    )
+    putTaskById(taskId, taskName)
+      .then(
+        (result) => {
+          console.log('Put Response : ', result)
+          const copiedTasks = tasks.concat()
+          const matchedTask = copiedTasks.find((task) => {
+            return task._id === taskId
+          })
+          if (typeof matchedTask === 'undefined') { return }
+          matchedTask.name = taskName
+          setTasks(copiedTasks)
+        },
+        (error) => {
+          setIsLoaded(true)
+          setError(error)
+        }
+      )
   }
 
   // TaskDetailコンポーネントに渡す関数
   function deleteSelectedTask (taskId: string) {
-    deleteTaskById(taskId,
-      (result) => {
-        console.log('Delete Response : ', result)
-        const copiedTasks = tasks.concat().filter((task) => {
-          return task._id !== taskId
-        })
-        setTasks(copiedTasks)
-        setSelectedTask(null)
-      },
-      (error) => {
-        setIsLoaded(true)
-        setError(error)
-      }
-    )
+    deleteTaskById(taskId)
+      .then(
+        (result) => {
+          console.log('Delete Response : ', result)
+          const copiedTasks = tasks.concat().filter((task) => {
+            return task._id !== taskId
+          })
+          setTasks(copiedTasks)
+          setSelectedTask(null)
+        },
+        (error) => {
+          setIsLoaded(true)
+          setError(error)
+        }
+      )
   }
 
   return (
