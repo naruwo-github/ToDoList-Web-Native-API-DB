@@ -3,48 +3,16 @@
 const API_URL = 'http://localhost:4000/tasks/'
 
 // GETリクエストの土台
-export function getRequest (
-  url: string,
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  fetch(url, {
-    mode: 'cors',
-    method: 'GET'
-  })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        successCallback(result)
-      },
-      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
-      (error) => {
-        failureCallback(error)
-      }
-    )
+export function get (url: string): Promise<any> {
+  return fetch(url, { mode: 'cors', method: 'GET' }).then(res => res.json())
 }
 
-export function getAllTasks (
-  successCallback: (result: any) => void,
-  failureCallback: (error: any) => void
-) {
-  getRequest(
-    API_URL,
-    successCallback,
-    failureCallback
-  )
+export function getAllTasks (): Promise<any> {
+  return get(API_URL)
 }
 
-export function getTaskById (
-  taskId: string,
-  successCallback: (result: any) => {},
-  failureCallback: (error: any) => {}
-) {
-  getRequest(
-    `${API_URL}${taskId}`,
-    successCallback,
-    failureCallback
-  )
+export function getTaskById (taskId: string): Promise<any> {
+  return get(`${API_URL}${taskId}`)
 }
 
 // POSTリクエストの土台

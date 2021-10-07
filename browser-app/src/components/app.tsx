@@ -20,11 +20,14 @@ export default function App () {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
 
   useEffect(() => {
-    getAllTasks((result) => {
+    getAllTasks().then(
+      (result) => {
         console.log('Get Response : ', result)
         setIsLoaded(true)
         setTasks(result)
-      }, (error) => {
+      },
+      // コンポーネント内のバグによる例外を隠蔽しないため、ここでエラーハンドリングすることが重要
+      (error) => {
         setIsLoaded(true)
         setError(error)
       }
