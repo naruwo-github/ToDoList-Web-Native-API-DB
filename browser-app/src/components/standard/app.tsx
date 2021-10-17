@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../api/httpHelper'
-import TaskList from '../components/taskList/taskList'
-import CreateNewTask from '../components/createNewTask/createNewTask'
-import TaskDetail from '../components/taskDetail/taskDetail'
+import styles from './app.module.css'
+import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../api/httpHelper'
+import TaskList from './taskList/taskList'
+import CreateNewTask from './createNewTask/createNewTask'
+import TaskDetail from './taskDetail/taskDetail'
 
 interface Task {
   _id: string
@@ -106,7 +107,7 @@ export default function App () {
   return (
     error ? <div>Error: {error.message}</div> :
       !isLoaded ? <div>Loading</div> :
-        <div>
+        <div className={styles.frame}>
           <h1>ToDoList</h1>
           <TaskList
             tasks={tasks}

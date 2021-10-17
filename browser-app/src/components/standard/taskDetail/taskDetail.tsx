@@ -1,4 +1,4 @@
-import './taskDetail.css'
+import styles from './taskDetail.module.css'
 import React, { useState } from 'react'
 
 interface Props {
@@ -20,7 +20,7 @@ export default function TaskDetail (props: Props) {
   }
 
   return (
-    <div className="detailBox">
+    <div className={styles.detailBox}>
       <div>
         <h2>Selected Task Detail</h2>
       </div>
