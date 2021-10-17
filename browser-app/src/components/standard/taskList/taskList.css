@@ -1,3 +1,7 @@
+.tableFrame {
+    width: 100%;
+}
+
 table {
     background-color: #7f7f7f;
     text-align: center;
