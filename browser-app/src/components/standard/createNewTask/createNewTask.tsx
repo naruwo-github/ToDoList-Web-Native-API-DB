@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './createNewTask.module.css'
 
 interface Props {
   formTextValue: string
@@ -8,18 +9,20 @@ interface Props {
 
 export default function CreateNewTask (props: Props) {
   return (
-    <label>
-      Create new task:
-      <input
-        id="taskNameForm"
-        type="text"
-        value={props.formTextValue}
-        placeholder="Task Name"
-        onChange={props.formTextChanged}
-      />
-      <button onClick={props.submitButtonTapped}>
-        Submit
-      </button>
-    </label>
+    <div className={styles.frame}>
+      <label>
+        Create new task:
+        <input
+          id="taskNameForm"
+          type="text"
+          value={props.formTextValue}
+          placeholder="Task Name"
+          onChange={props.formTextChanged}
+        />
+        <button onClick={props.submitButtonTapped}>
+          Submit
+        </button>
+      </label>
+    </div>
   )
 }

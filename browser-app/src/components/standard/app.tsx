@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import styles from './app.module.css'
 import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../api/httpHelper'
 import TaskList from './taskList/taskList'
 import CreateNewTask from './createNewTask/createNewTask'
@@ -106,7 +107,7 @@ export default function App () {
   return (
     error ? <div>Error: {error.message}</div> :
       !isLoaded ? <div>Loading</div> :
-        <div>
+        <div className={styles.frame}>
           <h1>ToDoList</h1>
           <TaskList
             tasks={tasks}
