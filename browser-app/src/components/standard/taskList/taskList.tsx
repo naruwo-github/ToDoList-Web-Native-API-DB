@@ -1,5 +1,6 @@
-import './taskList.css'
 import React from 'react'
+import styled from 'styled-components'
+import './taskList.css'
 
 interface Task {
   _id: string
@@ -9,12 +10,19 @@ interface Task {
   __v: number
 }
 
-export default function TaskList ({ tasks, taskLabelTapped }: {
-  tasks: Task[]
+const FrameDiv = styled.div`
+  width: 100%;
+`
+
+export default function TaskList ({
+  tasks,
+  taskLabelTapped
+}: {
+  tasks: Task[],
   taskLabelTapped: (task: Task) => void
 }) {
   return (
-    <div className="tableFrame">
+    <FrameDiv>
       <table>
         <thead>
         <tr>
@@ -36,6 +44,6 @@ export default function TaskList ({ tasks, taskLabelTapped }: {
         )}
         </tbody>
       </table>
-    </div>
+    </FrameDiv>
   )
 }
