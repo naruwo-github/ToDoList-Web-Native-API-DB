@@ -1,10 +1,30 @@
-// リクエストメソッドを集約する場所
-
-const API_URL = 'http://localhost:4000/tasks/'
+const API_URL: string = 'http://localhost:4000/tasks/'
+const headers: HeadersInit = {
+  'Content-Type': 'application/json'
+}
 
 // GETリクエストの土台
-export function get (url: string): Promise<any> {
-  return fetch(url, { mode: 'cors', method: 'GET' }).then(res => res.json())
+function get (url: string): Promise<any> {
+  return fetch(
+    url,
+    {
+      mode: 'cors',
+      method: 'GET'
+    }
+    ).then(res => res.json())
+}
+
+// POSTリクエストの土台
+function post(url: string, body: string): Promise<any> {
+  return fetch(
+    url,
+    {
+      mode: 'cors',
+      method: 'POST',
+      headers: headers,
+      body: body
+    }
+    ).then(res => res.json())
 }
 
 export function getAllTasks (): Promise<any> {
@@ -13,18 +33,6 @@ export function getAllTasks (): Promise<any> {
 
 export function getTaskById (taskId: string): Promise<any> {
   return get(`${API_URL}${taskId}`)
-}
-
-// POSTリクエストの土台
-export function post(url: string, body: string): Promise<any> {
-  return fetch(url, {
-    mode: 'cors',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: body
-  }).then(res => res.json())
 }
 
 export function createTask (taskName: string): Promise<any> {
@@ -36,22 +44,26 @@ export function createTask (taskName: string): Promise<any> {
 
 // DELETEリクエスト
 export function deleteTaskById (taskId: string): Promise<any> {
-  return fetch(`${API_URL}${taskId}`, {
-    mode: 'cors',
-    method: 'DELETE'
-  }).then(res => res.json())
+  return fetch(
+    `${API_URL}${taskId}`,
+    {
+      mode: 'cors',
+      method: 'DELETE'
+    }
+    ).then(res => res.json())
 }
 
 // PUTリクエスト
 export function putTaskById (taskId: string, taskName: string): Promise<any> {
-  return fetch(`${API_URL}${taskId}`, {
-    mode: 'cors',
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: taskName
-    })
-  }).then(res => res.json())
+  return fetch(
+    `${API_URL}${taskId}`,
+    {
+      mode: 'cors',
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({
+        name: taskName
+      })
+    }
+    ).then(res => res.json())
 }

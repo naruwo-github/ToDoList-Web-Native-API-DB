@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../api/httpHelper'
 import TaskList from './taskList/taskList'
-import CreateNewTask from './createNewTask/createNewTask'
+import CreateNewTask from './newTask/createNewTask'
 import TaskDetail from './taskDetail/taskDetail'
 
 interface Task {
