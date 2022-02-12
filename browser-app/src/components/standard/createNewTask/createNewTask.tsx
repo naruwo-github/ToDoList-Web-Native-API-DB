@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './createNewTask.module.css'
+import styled from 'styled-components'
 
 interface Props {
   formTextValue: string
@@ -7,9 +7,16 @@ interface Props {
   submitButtonTapped: () => void
 }
 
+const Frame = styled.div`
+  width: 100%;
+  height: 50px;
+  display: table-cell;
+  vertical-align: middle;
+`
+
 export default function CreateNewTask (props: Props) {
   return (
-    <div className={styles.frame}>
+    <Frame>
       <label>
         Create new task:
         <input
@@ -23,6 +30,6 @@ export default function CreateNewTask (props: Props) {
           Submit
         </button>
       </label>
-    </div>
+    </Frame>
   )
 }
