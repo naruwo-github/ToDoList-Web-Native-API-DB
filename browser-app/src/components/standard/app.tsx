@@ -18,7 +18,7 @@ const Frame = styled.div`
   height: 100%;
 `
 
-export default function App () {
+export default function Standard () {
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [tasks, setTasks] = useState<Task[]>([])
