@@ -1,5 +1,5 @@
-import './taskList.css'
 import React from 'react'
+import styled from 'styled-components'
 
 interface Task {
   _id: string
@@ -9,12 +9,31 @@ interface Task {
   __v: number
 }
 
-export default function TaskList ({ tasks, taskLabelTapped }: {
-  tasks: Task[]
+const TaskListFrame = styled.div`
+  width: 100%;
+`
+
+const ClickableLabel = styled.td`
+  color: darkblue;
+  &:hover {
+    font-size: 15px;
+    color: blue;
+  }
+  &:active {
+    font-size: 14px;
+    color: darkblue;
+  }
+`
+
+export default function TaskList ({
+  tasks,
+  taskLabelTapped
+}: {
+  tasks: Task[],
   taskLabelTapped: (task: Task) => void
 }) {
   return (
-    <div className="tableFrame">
+    <TaskListFrame>
       <table>
         <thead>
         <tr>
@@ -26,16 +45,15 @@ export default function TaskList ({ tasks, taskLabelTapped }: {
         {tasks.map(task =>
           <tr key={task._id}>
             <td>{task._id}</td>
-            <td
-              className="clickableLabel"
+            <ClickableLabel
               onClick={() => taskLabelTapped(task)}
             >
               {task.name}
-            </td>
+            </ClickableLabel>
           </tr>
         )}
         </tbody>
       </table>
-    </div>
+    </TaskListFrame>
   )
 }
