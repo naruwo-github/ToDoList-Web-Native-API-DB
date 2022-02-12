@@ -11,7 +11,7 @@ interface Props {
   deleteSelectedTask: (taskId: string) => void
 }
 
-const DetailBox = styled.div`
+const TaskDetailFrame = styled.div`
   background-color: bisque;
   width: 100%;
 `
@@ -25,7 +25,7 @@ export default function TaskDetail (props: Props) {
   }
 
   return (
-    <DetailBox>
+    <TaskDetailFrame>
       <div>
         <h2>Selected Task Detail</h2>
       </div>
@@ -56,6 +56,6 @@ export default function TaskDetail (props: Props) {
           Delete this!
         </button>
       </div>
-    </DetailBox>
+    </TaskDetailFrame>
   )
 }

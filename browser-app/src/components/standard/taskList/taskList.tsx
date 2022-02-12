@@ -10,7 +10,7 @@ interface Task {
   __v: number
 }
 
-const FrameDiv = styled.div`
+const TaskListFrame = styled.div`
   width: 100%;
 `
 
@@ -22,7 +22,7 @@ export default function TaskList ({
   taskLabelTapped: (task: Task) => void
 }) {
   return (
-    <FrameDiv>
+    <TaskListFrame>
       <table>
         <thead>
         <tr>
@@ -44,6 +44,6 @@ export default function TaskList ({
         )}
         </tbody>
       </table>
-    </FrameDiv>
+    </TaskListFrame>
   )
 }

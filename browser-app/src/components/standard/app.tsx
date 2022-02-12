@@ -13,7 +13,7 @@ interface Task {
   __v: number
 }
 
-const FrameDiv = styled.div`
+const Frame = styled.div`
   width: 100%;
   height: 100%;
 `
@@ -112,7 +112,7 @@ export default function App () {
   return (
     error ? <div>Error: {error.message}</div> :
       !isLoaded ? <div>Loading</div> :
-        <FrameDiv>
+        <Frame>
           <h1>ToDoList</h1>
           <TaskList
             tasks={tasks}
@@ -136,6 +136,6 @@ export default function App () {
               deleteSelectedTask={deleteSelectedTask}
             />
           )}
-        </FrameDiv>
+        </Frame>
   )
 }

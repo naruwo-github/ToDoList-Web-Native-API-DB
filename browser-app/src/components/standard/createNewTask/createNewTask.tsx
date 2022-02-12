@@ -7,7 +7,7 @@ interface Props {
   submitButtonTapped: () => void
 }
 
-const Frame = styled.div`
+const CreateNewTaskFrame = styled.div`
   width: 100%;
   height: 50px;
   display: table-cell;
@@ -16,7 +16,7 @@ const Frame = styled.div`
 
 export default function CreateNewTask (props: Props) {
   return (
-    <Frame>
+    <CreateNewTaskFrame>
       <label>
         Create new task:
         <input
@@ -30,6 +30,6 @@ export default function CreateNewTask (props: Props) {
           Submit
         </button>
       </label>
-    </Frame>
+    </CreateNewTaskFrame>
   )
 }
