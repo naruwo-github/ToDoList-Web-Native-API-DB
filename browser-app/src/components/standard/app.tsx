@@ -5,14 +5,6 @@ import TaskList from './taskList/taskList'
 import CreateNewTask from './newTask/createNewTask'
 import TaskDetail from './taskDetail/taskDetail'
 
-interface Task {
-  _id: string
-  name: string
-  description: string
-  created_date: Date
-  __v: number
-}
-
 const Frame = styled.div`
   width: 100%;
   height: 100%;

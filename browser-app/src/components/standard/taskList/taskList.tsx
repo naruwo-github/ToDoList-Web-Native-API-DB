@@ -1,14 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-interface Task {
-  _id: string
-  name: string
-  description: string
-  created_date: Date
-  __v: number
-}
-
 const TaskListFrame = styled.div`
   width: 100%;
 `
