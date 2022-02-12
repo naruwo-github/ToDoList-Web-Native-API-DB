@@ -1,5 +1,5 @@
-import styles from './taskDetail.module.css'
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 interface Props {
   _id: string
@@ -11,6 +11,11 @@ interface Props {
   deleteSelectedTask: (taskId: string) => void
 }
 
+const DetailBox = styled.div`
+  background-color: bisque;
+  width: 100%;
+`
+
 export default function TaskDetail (props: Props) {
   const [formTextValue, setFormTextValue] = useState(props.name)
 
@@ -20,7 +25,7 @@ export default function TaskDetail (props: Props) {
   }
 
   return (
-    <div className={styles.detailBox}>
+    <DetailBox>
       <div>
         <h2>Selected Task Detail</h2>
       </div>
@@ -51,6 +56,6 @@ export default function TaskDetail (props: Props) {
           Delete this!
         </button>
       </div>
-    </div>
+    </DetailBox>
   )
 }
