@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
+import { StyledAppFrame } from './style'
 import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../api/httpHelper'
 import TaskList from './taskList/taskList'
-import CreateNewTask from './createNewTask/createNewTask'
+import CreateNewTask from './newTask/createNewTask'
 import TaskDetail from './taskDetail/taskDetail'
 
-interface Task {
-  _id: string
-  name: string
-  description: string
-  created_date: Date
-  __v: number
-}
-
-const Frame = styled.div`
-  width: 100%;
-  height: 100%;
-`
-
-export default function App () {
+export default function Standard () {
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [tasks, setTasks] = useState<Task[]>([])
@@ -112,7 +99,7 @@ export default function App () {
   return (
     error ? <div>Error: {error.message}</div> :
       !isLoaded ? <div>Loading</div> :
-        <Frame>
+        <StyledAppFrame>
           <h1>ToDoList</h1>
           <TaskList
             tasks={tasks}
@@ -136,6 +123,6 @@ export default function App () {
               deleteSelectedTask={deleteSelectedTask}
             />
           )}
-        </Frame>
+        </StyledAppFrame>
   )
 }
