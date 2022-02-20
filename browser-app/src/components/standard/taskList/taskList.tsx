@@ -1,25 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const TaskListFrame = styled.div`
-  width: 100%;
-`
-
-const ClickableLabel = styled.td`
-  color: darkblue;
-  &:hover {
-    font-size: 15px;
-    color: blue;
-  }
-  &:active {
-    font-size: 14px;
-    color: darkblue;
-  }
-`
+import { StyledClickableLabel, StyledTaskListFrame } from './style'
 
 export default function TaskList (props: TaskListProps) {
   return (
-    <TaskListFrame>
+    <StyledTaskListFrame>
       <table>
         <thead>
         <tr>
@@ -31,15 +15,15 @@ export default function TaskList (props: TaskListProps) {
         {props.tasks.map(task =>
           <tr key={task._id}>
             <td>{task._id}</td>
-            <ClickableLabel
+            <StyledClickableLabel
               onClick={() => props.taskLabelTapped(task)}
             >
               {task.name}
-            </ClickableLabel>
+            </StyledClickableLabel>
           </tr>
         )}
         </tbody>
       </table>
-    </TaskListFrame>
+    </StyledTaskListFrame>
   )
 }

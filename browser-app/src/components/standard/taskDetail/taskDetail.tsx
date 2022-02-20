@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-
-const TaskDetailFrame = styled.div`
-  background-color: bisque;
-  width: 100%;
-`
+import { StyledTaskDetailFrame } from './style'
 
 export default function TaskDetail (props: TaskDetailProps) {
   const [formTextValue, setFormTextValue] = useState(props.name)
@@ -15,7 +10,7 @@ export default function TaskDetail (props: TaskDetailProps) {
   }
 
   return (
-    <TaskDetailFrame>
+    <StyledTaskDetailFrame>
       <div>
         <h2>Selected Task Detail</h2>
       </div>
@@ -46,6 +41,6 @@ export default function TaskDetail (props: TaskDetailProps) {
           Delete this!
         </button>
       </div>
-    </TaskDetailFrame>
+    </StyledTaskDetailFrame>
   )
 }

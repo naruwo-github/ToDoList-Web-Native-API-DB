@@ -1,16 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
-
-const CreateNewTaskFrame = styled.div`
-  width: 100%;
-  height: 50px;
-  display: table-cell;
-  vertical-align: middle;
-`
+import { StyledCreateNewTaskFrame } from './style'
 
 export default function CreateNewTask (props: CreateNewTaskProps) {
   return (
-    <CreateNewTaskFrame>
+    <StyledCreateNewTaskFrame>
       <label>
         Create new task:
         <input
@@ -24,6 +17,6 @@ export default function CreateNewTask (props: CreateNewTaskProps) {
           Submit
         </button>
       </label>
-    </CreateNewTaskFrame>
+    </StyledCreateNewTaskFrame>
   )
 }
