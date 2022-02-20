@@ -17,13 +17,7 @@ const ClickableLabel = styled.td`
   }
 `
 
-export default function TaskList ({
-  tasks,
-  taskLabelTapped
-}: {
-  tasks: Task[],
-  taskLabelTapped: (task: Task) => void
-}) {
+export default function TaskList (props: TaskListProps) {
   return (
     <TaskListFrame>
       <table>
@@ -34,11 +28,11 @@ export default function TaskList ({
         </tr>
         </thead>
         <tbody>
-        {tasks.map(task =>
+        {props.tasks.map(task =>
           <tr key={task._id}>
             <td>{task._id}</td>
             <ClickableLabel
-              onClick={() => taskLabelTapped(task)}
+              onClick={() => props.taskLabelTapped(task)}
             >
               {task.name}
             </ClickableLabel>

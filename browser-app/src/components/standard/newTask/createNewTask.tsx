@@ -1,12 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-interface Props {
-  formTextValue: string
-  formTextChanged: (event: any) => void
-  submitButtonTapped: () => void
-}
-
 const CreateNewTaskFrame = styled.div`
   width: 100%;
   height: 50px;
@@ -14,7 +8,7 @@ const CreateNewTaskFrame = styled.div`
   vertical-align: middle;
 `
 
-export default function CreateNewTask (props: Props) {
+export default function CreateNewTask (props: CreateNewTaskProps) {
   return (
     <CreateNewTaskFrame>
       <label>
