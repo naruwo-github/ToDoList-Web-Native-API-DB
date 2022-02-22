@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyledAppFrame } from './style'
-import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../api/httpHelper'
+import { getAllTasks, createTask, deleteTaskById, putTaskById } from '../../global/httpHelper'
 import TaskList from './taskList/taskList'
 import CreateNewTask from './newTask/createNewTask'
 import TaskDetail from './taskDetail/taskDetail'
