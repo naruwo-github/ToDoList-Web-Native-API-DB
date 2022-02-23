@@ -91,6 +91,7 @@ function TestChild4 ({
     return (
         <div>
             <h5>{testString}</h5>
+            {/* 上のtestStringとtestStringFromContextが同じオブジェクトを参照していることが確認できる！！！ */}
             <h5>{testStringFromContext}</h5>
         </div>
     )
